@@ -1,0 +1,1 @@
+cmd_/home/se205174/embedded_lab2/driver/lab2_driver.ko := arm-linux-gnueabihf-ld -r -EL --build-id=sha1  -T scripts/module.lds -o /home/se205174/embedded_lab2/driver/lab2_driver.ko /home/se205174/embedded_lab2/driver/lab2_driver.o /home/se205174/embedded_lab2/driver/lab2_driver.mod.o;  true
