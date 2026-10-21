@@ -159,3 +159,87 @@ Embedded Linux Systems
 - BusyBox 1.35.0
 - ARM Cortex-A9
 - QEMU vexpress-a9
+---
+
+## LAB03 – Debugging, Profiling and Real-Time Analysis
+
+### 1. Objectives
+
+This lab focuses on debugging, memory analysis, performance
+profiling, and real-time latency measurement in Linux.
+
+### 2. Part A – Remote Debugging with GDB
+
+Tools:
+- QEMU ARM Cortex-A9
+- gdbserver
+- gdb-multiarch
+
+Three bugs were investigated and fixed:
+
+| Bug | Cause | Solution |
+|---|---|---|
+| Array Out of Bounds | Loop condition `i <= len` | Change to `i < len` |
+| Use After Free | Memory freed before use | Free memory after use |
+| Integer Overflow | 32-bit integer multiplication | Use `long long` |
+
+**GDB log:** [gdb_session.txt](LAB03/logs/gdb_session.txt)
+
+### 3. Part B – Memory Analysis with Valgrind
+
+Before fixing:
+- Definitely lost: 16,900 bytes in 250 blocks.
+- Error summary: 3 errors.
+
+After fixing:
+- No memory leaks detected.
+- Error summary: 0 errors.
+
+**Results:**
+- [Before fixing](LAB03/logs/valgrind_report.txt)
+- [After fixing](LAB03/logs/valgrind_fixed.txt)
+
+### 4. Part C – System Call Tracing and Profiling
+
+Tools:
+- strace
+- perf
+
+Results:
+- [Strace summary](LAB03/logs/strace_summary.txt)
+- [Perf report](LAB03/logs/perf_report.txt)
+- [Perf statistics](LAB03/logs/perf_stat.txt)
+
+### 5. Part D – Real-Time Latency Analysis
+
+Tool: cyclictest
+
+Test environments:
+- Generic Kernel: `7.0.0-38-generic`
+- PREEMPT_RT Kernel: `7.0.0-38-realtime`
+
+| Kernel | Maximum Latency |
+|---|---|
+| Generic | 245 µs |
+| PREEMPT_RT | 64 µs |
+
+In these tests, PREEMPT_RT reduced the observed maximum
+latency by approximately 73.9%.
+
+![Latency Comparison](LAB03/bao_cao/latency_comparison.png)
+
+### 6. LAB03 Report
+
+[View LAB03 PDF Report](LAB03/bao_cao/SE205174_Lab03_BaoCao.pdf)
+
+### 7. LAB03 Directory Structure
+
+```text
+LAB03/
+├── apps/
+├── logs/
+├── bao_cao/
+│   └── SE205174_Lab03_BaoCao.pdf
+└── output/
+    └── initramfs_lab3.cpio.gz
+```
