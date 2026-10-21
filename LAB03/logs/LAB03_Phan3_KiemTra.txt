@@ -1,0 +1,24 @@
+==================================
+LAB03 - PHAN III
+CHUAN BI MOI TRUONG DEBUG
+==================================
+Mon Oct 19 11:09:06 PM +07 2026
+===== GDB =====
+GNU gdb (Ubuntu 17.1-2ubuntu1) 17.1
+===== VALGRIND =====
+valgrind-3.26.0
+===== STRACE =====
+strace -- version 6.19
+===== PERF =====
+/usr/bin/perf
+===== CYCLICTEST =====
+cyclictest V 2.80
+Usage:
+cyclictest <options>
+===== GDBSERVER ARM =====
+rootfs/initramfs/usr/bin/gdbserver: ELF 32-bit LSB pie executable, ARM, EABI5 version 1 (GNU/Linux), dynamically linked, interpreter /lib/ld-linux-armhf.so.3, BuildID[sha1]=0ab0e7e3e90f69625073a52c5d42107d1451ce7c, for GNU/Linux 3.2.0, stripped
+===== ARM APPLICATION =====
+apps/buggy_app: ELF 32-bit LSB pie executable, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-armhf.so.3, BuildID[sha1]=9d07085769d379d3afef6ba2b7c4b07fe2a0708d, for GNU/Linux 3.2.0, with debug_info, not stripped
+===== ROOTFS =====
+total 3.6M
+-rw-rw-r-- 1 se205174 se205174 3.6M Oct 19 22:53 initramfs_lab3.cpio.gz

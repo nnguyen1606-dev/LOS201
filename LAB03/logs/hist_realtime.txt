@@ -1,0 +1,17 @@
+# /dev/cpu_dma_latency set to 0us
+T: 0 (11990) P:80 I:1000 C:  30000 Min:      1 Act:    1 Avg:    1 Max:      19
+T: 1 (11991) P:80 I:1500 C:  19999 Min:      1 Act:    1 Avg:    1 Max:      14
+T: 2 (11992) P:80 I:2000 C:  14999 Min:      1 Act:    1 Avg:    1 Max:       9
+T: 3 (11993) P:80 I:2500 C:  11999 Min:      1 Act:    1 Avg:    1 Max:       6
+T: 4 (11994) P:80 I:3000 C:   9998 Min:      1 Act:    1 Avg:    1 Max:       7
+T: 5 (11995) P:80 I:3500 C:   8570 Min:      1 Act:    2 Avg:    1 Max:       8
+T: 6 (11996) P:80 I:4000 C:   7498 Min:      1 Act:    1 Avg:    1 Max:      22
+T: 7 (11997) P:80 I:4500 C:   6665 Min:      1 Act:    2 Avg:    1 Max:       7
+T: 8 (11998) P:80 I:5000 C:   5998 Min:      1 Act:    1 Avg:    1 Max:       7
+T: 9 (11999) P:80 I:5500 C:   5452 Min:      1 Act:    1 Avg:    1 Max:       8
+T:10 (12000) P:80 I:6000 C:   4998 Min:      1 Act:    2 Avg:    1 Max:       8
+T:11 (12001) P:80 I:6500 C:   4613 Min:      1 Act:    1 Avg:    1 Max:       9
+T:12 (12002) P:80 I:7000 C:   4283 Min:      1 Act:    2 Avg:    2 Max:      10
+T:13 (12003) P:80 I:7500 C:   3998 Min:      1 Act:    2 Avg:    2 Max:      64
+T:14 (12004) P:80 I:8000 C:   3748 Min:      1 Act:    2 Avg:    2 Max:      10
+T:15 (12005) P:80 I:8500 C:   3527 Min:      1 Act:    2 Avg:    2 Max:      10

@@ -1,0 +1,93 @@
+========================================
+LAB03 - GDB DEBUGGING RESULTS
+========================================
+
+Student ID: SE205174
+Group: 10
+
+Target: ARM Cortex-A9
+Debugger: gdb-multiarch
+Remote Debugging: gdbserver
+Port: 1234
+
+----------------------------------------
+BUG 1: ARRAY OUT OF BOUNDS
+----------------------------------------
+
+Function: process_data()
+
+GDB Breakpoint:
+break process_data
+
+Observed:
+len = 5
+i = 5
+sum = 150
+
+Problem:
+Loop condition i <= len accesses data[5]
+while the array only contains 5 elements.
+
+Fix:
+Change i <= len to i < len.
+
+----------------------------------------
+BUG 2: USE AFTER FREE
+----------------------------------------
+
+Function: create_message()
+
+GDB Breakpoint:
+break create_message
+
+Observed:
+Buffer contains "Hello Embedded Linux"
+before free().
+
+After free(), the returned pointer refers
+to memory that is no longer valid.
+
+Fix:
+Remove free(buf) from create_message().
+Release memory in main() after using it.
+
+----------------------------------------
+BUG 3: INTEGER OVERFLOW
+----------------------------------------
+
+Function: calculate()
+
+GDB Breakpoint:
+break calculate
+
+Observed:
+a = 100000
+b = 100000
+
+Expected result:
+10000000000
+
+Problem:
+The result exceeds the range of int.
+
+Fix:
+Use long long for the multiplication result.
+
+----------------------------------------
+FINAL TEST RESULTS
+----------------------------------------
+
+[TEST1] Processing array
+Sum = 150
+
+[TEST2] Creating message
+Message: Hello Embedded Linux
+
+[TEST3] Integer calculation
+calculate(100000, 100000) = 10000000000
+
+Done.
+
+STATUS: ALL THREE BUGS FIXED
+========================================
+

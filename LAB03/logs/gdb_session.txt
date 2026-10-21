@@ -1,0 +1,122 @@
+Remote debugging using localhost:1234
+Reading symbols from /usr/arm-linux-gnueabihf/lib/ld-linux-armhf.so.3...
+
+This GDB supports auto-downloading debuginfo from the following URLs:
+  <https://debuginfod.ubuntu.com>
+Debuginfod has been disabled.
+To make this setting permanent, add 'set debuginfod enabled off' to .gdbinit.
+0x76fdee58 in _start () from /usr/arm-linux-gnueabihf/lib/ld-linux-armhf.so.3
+Breakpoint 1 at 0x400682: file buggy_app.c, line 7.
+Breakpoint 2 at 0x4006cc: file buggy_app.c, line 16.
+Breakpoint 3 at 0x400702: file buggy_app.c, line 24.
+Num     Type           Disp Enb Address    What
+1       breakpoint     keep y   0x00400682 in process_data at buggy_app.c:7
+2       breakpoint     keep y   0x004006cc in create_message at buggy_app.c:16
+3       breakpoint     keep y   0x00400702 in calculate at buggy_app.c:24
+Continuing.
+
+Breakpoint 1, process_data (data=0x7efffcf0, len=5) at buggy_app.c:7
+7	    int sum = 0;
+#0  process_data (data=0x7efffcf0, len=5) at buggy_app.c:7
+#1  0x00400774 in main (argc=1, argv=0x7efffe94) at buggy_app.c:35
+r0             0x7efffcf0          2130705648
+r1             0x5                 5
+r2             0x76fc152c          1996231980
+r3             0x7efffcf0          2130705648
+r4             0x7efffd00          2130705664
+r5             0x40099c            4196764
+r6             0x7efffe94          2130706068
+r7             0x7efffcc8          2130705608
+r8             0x76ffee58          1996484184
+r9             0x400729            4196137
+r10            0x41feac            4325036
+r11            0x76fff000          1996484608
+r12            0x4                 4
+sp             0x7efffcc8          0x7efffcc8
+lr             0x400775            4196213
+pc             0x400682            0x400682 <process_data+10>
+cpsr           0x200f0030          537854000
+fpscr          0x0                 0
+$1 = 5
+$2 = 10
+Breakpoint 4 at 0x40068c: file buggy_app.c, line 9.
+Continuing.
+
+Breakpoint 4, process_data (data=0x7efffcf0, len=5) at buggy_app.c:9
+9	        sum += data[i];
+$3 = 5
+$4 = 5
+$5 = 150
+Continuing.
+
+Breakpoint 2, create_message (text=0x400940 "Hello Embedded Linux") at buggy_app.c:16
+16	    char *buf = malloc(strlen(text) + 1);
+13	
+14	/* Bug 2: Use after free */
+15	char *create_message(const char *text) {
+16	    char *buf = malloc(strlen(text) + 1);
+17	    strcpy(buf, text);
+18	    free(buf);
+19	    return buf;
+20	}
+21	
+22	/* Bug 3: Integer overflow */
+#0  create_message (text=0x400940 "Hello Embedded Linux") at buggy_app.c:16
+#1  0x00400788 in main (argc=1, argv=0x7efffe94) at buggy_app.c:39
+r0             0x400940            4196672
+r1             0x76fc152c          1996231980
+r2             0x76fc152c          1996231980
+r3             0x400940            4196672
+r4             0x7efffd00          2130705664
+r5             0x40099c            4196764
+r6             0x7efffe94          2130706068
+r7             0x7efffcc8          2130705608
+r8             0x76ffee58          1996484184
+r9             0x400729            4196137
+r10            0x41feac            4325036
+r11            0x76fff000          1996484608
+r12            0x4                 4
+sp             0x7efffcc8          0x7efffcc8
+lr             0x400789            4196233
+pc             0x4006cc            0x4006cc <create_message+8>
+cpsr           0x60000030          1610612784
+fpscr          0x0                 0
+$6 = 0x400940 "Hello Embedded Linux"
+$7 = 0x7efffe94 "{\377\377~"
+17	    strcpy(buf, text);
+18	    free(buf);
+$8 = 0x422010 "Hello Embedded Linux"
+$9 = 0x422010 "Hello Embedded Linux"
+19	    return buf;
+$10 = 0x422010 "\"\004"
+Continuing.
+
+Breakpoint 3, calculate (a=100000, b=100000) at buggy_app.c:24
+24	    int result = a * b;
+❌️ Undefined command: "Breakpoint".  Try "help".
+#0  calculate (a=100000, b=100000) at buggy_app.c:24
+#1  0x004007b4 in main (argc=1, argv=0x7efffe94) at buggy_app.c:44
+r0             0x186a0             100000
+r1             0x186a0             100000
+r2             0x76fc152c          1996231980
+r3             0x0                 0
+r4             0x7efffd00          2130705664
+r5             0x40099c            4196764
+r6             0x7efffe94          2130706068
+r7             0x7efffcc8          2130705608
+r8             0x76ffee58          1996484184
+r9             0x400729            4196137
+r10            0x41feac            4325036
+r11            0x76fff000          1996484608
+r12            0x4                 4
+sp             0x7efffcc8          0x7efffcc8
+lr             0x4007b5            4196277
+pc             0x400702            0x400702 <calculate+10>
+cpsr           0x600f0030          1611595824
+fpscr          0x0                 0
+$11 = 100000
+$12 = 100000
+25	    printf("calculate(%d, %d) = %d\n", a, b, result);
+$13 = 1410065408
+Continuing.
+[Inferior 1 (process 67) exited normally]

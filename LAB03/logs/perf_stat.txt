@@ -1,0 +1,36 @@
+=== Perf Target App - LAB-03 ===
+[1] CPU-intensive computation...
+    Result: 11433083166.074631
+[2] Linear search (1000 times)...
+[3] I/O intensive (write 10000 lines)...
+Done.
+
+ Performance counter stats for './perf_target':
+
+                 2      context-switches                 #    104.7 cs/sec  cs_per_second     
+                 1      cpu-migrations                   #     52.3 migrations/sec  migrations_per_second
+               378      page-faults                      #  19781.7 faults/sec  page_faults_per_second
+             19.11 msec task-clock                       #      0.9 CPUs  CPUs_utilized       
+             6,866      cpu_core/branch-misses/          #      0.0 %  branch_miss_rate         (95.79%)
+        53,881,798      cpu_core/branches/               #   2819.8 M/sec  branch_frequency     (95.79%)
+        81,350,710      cpu_core/cpu-cycles/             #      4.3 GHz  cycles_frequency       (95.79%)
+       390,055,097      cpu_core/instructions/           #      4.8 instructions  insn_per_cycle  (95.79%)
+           217,222      cpu_atom/branch-misses/          #      2.0 %  branch_miss_rate         (4.15%)
+        10,500,275      cpu_atom/branches/               #    549.5 M/sec  branch_frequency     (4.21%)
+        65,083,952      cpu_atom/cpu-cycles/             #      3.4 GHz  cycles_frequency       (4.21%)
+        63,714,991      cpu_atom/instructions/           #      1.0 instructions  insn_per_cycle  (4.21%)
+             TopdownL1 (cpu_core)                        #      0.0 %  tma_bad_speculation    
+                                                         #      7.0 %  tma_frontend_bound       (95.79%)
+                                                         #      8.2 %  tma_backend_bound      
+                                                         #     84.7 %  tma_retiring             (95.79%)
+             TopdownL1 (cpu_atom)                        #      nan %  tma_backend_bound        (0.00%)
+                                                         #      nan %  tma_frontend_bound       (0.00%)
+                                                         #      nan %  tma_bad_speculation    
+                                                         #      nan %  tma_retiring             (0.00%)
+
+       0.019697940 seconds time elapsed
+
+       0.016871000 seconds user
+       0.002811000 seconds sys
+
+
