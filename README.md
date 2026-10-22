@@ -112,20 +112,101 @@ Driver `counter_driver` sử dụng `misc_register()` và cung cấp:
 
 ## Repository Structure
 
+Cấu trúc dưới đây được tóm tắt từ các thư mục thực tế trong repository (các file ảnh, log và file build phụ được lược bớt để dễ đọc).
+
 ```text
 LOS201/
 ├── LAB01/
+│   ├── bao_cao/
+│   │   └── SE205174_Lab01_BaoCao.pdf
+│   ├── configs/
+│   │   ├── busybox.config
+│   │   ├── kernel.config
+│   │   └── uboot.config
+│   ├── output/
+│   │   ├── initramfs.cpio.gz
+│   │   ├── u-boot.bin
+│   │   ├── vexpress-v2p-ca9.dtb
+│   │   └── zImage
+│   ├── rootfs/
+│   │   └── initramfs/                 # Root filesystem, init, bin, dev, etc...
+│   └── SE205174_NguyenTranNamNguyen_Lab01.tar.gz
+│
 ├── LAB02/
+│   ├── bao_cao/
+│   │   ├── SE205174_Lab02_BaoCao.pdf
+│   │   └── LAB02_*.png               # Ảnh kiểm thử driver, JFFS2, init...
+│   ├── configs/
+│   ├── driver/
+│   │   ├── lab2_driver.c
+│   │   ├── lab2_driver.ko
+│   │   └── Makefile
+│   ├── mtd/
+│   │   ├── jffs2_data/
+│   │   ├── rootfs.jffs2
+│   │   ├── nand_dump.bin
+│   │   ├── lab2_rootfs.squashfs
+│   │   └── squashfs_root/
+│   ├── output/
+│   │   └── initramfs_lab2.cpio.gz
+│   ├── rootfs/
+│   │   └── initramfs/
+│   └── SE205174_NguyenTranNamNguyen_Lab02.tar.gz
+│
 ├── LAB03/
+│   ├── apps/
+│   │   ├── buggy_app.c
+│   │   ├── buggy_app_fixed.c
+│   │   ├── leaky_app.c
+│   │   ├── leaky_app_fixed.c
+│   │   ├── perf_target.c
+│   │   └── perf_test_lab03.txt
+│   ├── bao_cao/
+│   │   ├── SE205174_Lab03_BaoCao.pdf
+│   │   ├── latency_comparison.png
+│   │   ├── latency_histogram.png
+│   │   └── LAB03_*.png               # Ảnh GDB, Valgrind, sửa lỗi...
+│   ├── logs/
+│   │   ├── gdb_session.txt
+│   │   ├── valgrind_report.txt
+│   │   ├── strace_summary.txt
+│   │   ├── perf_report.txt
+│   │   ├── hist_standard.txt
+│   │   └── hist_realtime.txt
+│   └── output/
+│       └── initramfs_lab3.cpio.gz
+│
 ├── Assignment01/
 │   ├── SE205174_NguyenTranNamNguyen_Asgn01.tar.gz
 │   └── SE205174_NguyenTranNamNguyen_Asgn01/
-│       ├── task1_ioctl/
-│       ├── task2_misc/
+│       ├── bao_cao/
+│       │   └── SE205174_NguyenTranNamNguyen_Asgn01_BaoCao.pdf
 │       ├── logs/
-│       └── bao_cao/
+│       │   ├── dmesg_counter.txt
+│       │   ├── dmesg_full.txt
+│       │   ├── test_asgn1_output.txt
+│       │   └── test_counter_output.txt
+│       ├── task1_ioctl/
+│       │   ├── asgn1_driver.c
+│       │   ├── asgn1_driver.ko
+│       │   ├── asgn1_ioctl.h
+│       │   ├── Makefile
+│       │   ├── test_asgn1.sh
+│       │   └── test_ioctl.c
+│       └── task2_misc/
+│           ├── counter_driver.c
+│           ├── counter_driver.ko
+│           ├── Makefile
+│           └── test_counter.sh
 └── README.md
 ```
+
+### Báo cáo PDF của từng bài
+
+- [LAB01 — Báo cáo PDF](./LAB01/bao_cao/SE205174_Lab01_BaoCao.pdf)
+- [LAB02 — Báo cáo PDF](./LAB02/bao_cao/SE205174_Lab02_BaoCao.pdf)
+- [LAB03 — Báo cáo PDF](./LAB03/bao_cao/SE205174_Lab03_BaoCao.pdf)
+- [Assignment 01 — Báo cáo PDF](./Assignment01/SE205174_NguyenTranNamNguyen_Asgn01/bao_cao/SE205174_NguyenTranNamNguyen_Asgn01_BaoCao.pdf)
 
 > **Ghi chú:** README mô tả phạm vi và yêu cầu kỹ thuật của các bài theo tài liệu môn học. Kết quả thực hiện cụ thể, ảnh chụp, log và báo cáo cần được đối chiếu trong từng thư mục bài nộp.
 
