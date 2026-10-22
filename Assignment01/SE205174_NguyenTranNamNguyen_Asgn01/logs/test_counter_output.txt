@@ -1,0 +1,25 @@
+===== TASK 2: MISC COUNTER DRIVER TEST =====
+===== INITIAL COUNTER INFO =====
+Counter Driver Information
+Current counter: 0
+Read count: 0
+Write count: 0
+===== SET COUNTER TO 0 =====
+===== READ COUNTER TWICE =====
+0
+1
+===== WRITE COUNTER = 100 =====
+===== READ AFTER WRITE =====
+100
+===== TEST NEGATIVE NUMBER =====
+sh: write error: Invalid argument
+PASS: negative value rejected
+===== TEST INVALID STRING =====
+sh: write error: Invalid argument
+PASS: invalid string rejected
+===== FINAL COUNTER INFO =====
+Counter Driver Information
+Current counter: 101
+Read count: 3
+Write count: 2
+===== TASK 2 TEST COMPLETED =====

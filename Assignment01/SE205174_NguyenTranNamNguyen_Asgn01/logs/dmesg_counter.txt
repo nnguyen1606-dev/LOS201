@@ -1,0 +1,4 @@
+counter_driver: loading out-of-tree module taints kernel.
+counter_driver: module loaded successfully
+counter_driver: counter set to 100
+counter_driver: counter set to 0

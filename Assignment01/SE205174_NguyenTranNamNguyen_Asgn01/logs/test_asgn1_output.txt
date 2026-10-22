@@ -1,0 +1,62 @@
+===== ASSIGNMENT 01 - TASK 1 TEST =====
+[1] Loading driver...
+[2] Creating device node...
+[3] Checking device...
+crw-r--r--    1 root     0         241,   0 Oct 22 02:46 /dev/asgn1
+[4] Running ioctl tests...
+SET_MODE invalid: Invalid argument
+Unsupported ioctl: Inappropriate ioctl for device
+Driver version: asgn1_driver v1.0 - SE205174
+Open count: 1
+Write count: 0
+Read count: 0
+Buffer length: 0
+Last write size: 0
+SET_MODE: Kernel mode enabled
+Kernel mode result: [KERNEL]Hello
+RESET_BUFFER: Success
+Write count after reset: 0
+Read count after reset: 0
+Buffer length after reset: 0
+SET_MODE: Echo mode enabled
+Echo mode result: Hello Echo
+Echo mode result: 
+Invalid mode rejected successfully
+Unsupported ioctl rejected successfully
+[5] Checking kernel messages...
+asgn1_driver: loading out-of-tree module taints kernel.
+lab2_driver: initializing module
+lab2_driver: loaded, major=241
+lab2_driver: device opened (count=1)
+asgn1_driver: GET_VERSION called
+asgn1_driver: GET_STATS called
+asgn1_driver: mode changed to 0
+asgn1_driver: received 5 bytes
+lab2_driver: sent 13 bytes to user
+asgn1_driver: buffer and counters reset
+asgn1_driver: GET_STATS called
+asgn1_driver: mode changed to 1
+asgn1_driver: received 10 bytes
+lab2_driver: device closed
+lab2_driver: device opened (count=2)
+lab2_driver: sent 10 bytes to user
+lab2_driver: device closed
+lab2_driver: module unloaded
+lab2_driver: initializing module
+lab2_driver: loaded, major=241
+lab2_driver: device opened (count=1)
+asgn1_driver: GET_VERSION called
+asgn1_driver: GET_STATS called
+asgn1_driver: mode changed to 0
+asgn1_driver: received 5 bytes
+lab2_driver: sent 13 bytes to user
+asgn1_driver: buffer and counters reset
+asgn1_driver: GET_STATS called
+asgn1_driver: mode changed to 1
+asgn1_driver: received 10 bytes
+lab2_driver: device closed
+lab2_driver: device opened (count=2)
+lab2_driver: sent 10 bytes to user
+lab2_driver: device closed
+[6] Unloading driver...
+===== TASK 1 TEST COMPLETED =====
