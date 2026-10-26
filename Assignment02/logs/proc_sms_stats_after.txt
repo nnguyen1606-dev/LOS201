@@ -1,0 +1,6 @@
+SMS Sensor Statistics
+Sampling interval: 500 ms
+read_count: 119
+Last temperature: 39.1 C
+Last humidity: 55.1 %
+Driver uptime: 65 seconds

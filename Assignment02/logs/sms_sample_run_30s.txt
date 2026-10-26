@@ -1,0 +1,27 @@
+=================================
+ Sensor Monitoring System Started
+=================================
+[RT] Sensor scheduling: SCHED_OTHER
+[Main] All four threads started
+[Main] Press Ctrl+C to stop
+[RT VERIFY] Actual policy: SCHED_OTHER
+[RT VERIFY] Actual priority: 0
+
+========== SENSOR JITTER REPORT ==========
+[JITTER] Scheduling: SCHED_OTHER
+[JITTER] Samples: 61/1000
+[JITTER] Min: 76 us
+[JITTER] Avg: 198.59 us
+[JITTER] Max: 385 us
+[JITTER] P99: 385 us
+[JITTER] Missed deadlines: 0
+
+[JITTER HISTOGRAM]
+0-100 us:       2
+100-500 us:     59
+500-1000 us:    0
+>1000 us:       0
+==========================================
+
+[ALERT STATS] TEMP_HIGH=10 HUMID_HIGH=10 TEMP_SPIKE=2
+[Main] Sensor Monitoring System Stopped

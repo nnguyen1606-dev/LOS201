@@ -1,0 +1,46 @@
+==========================================
+TASK 4 - REAL-TIME JITTER COMPARISON
+==========================================
+
+========== SCHED_OTHER ==========
+========== SENSOR JITTER REPORT ==========
+[JITTER] Scheduling: SCHED_OTHER
+[JITTER] Samples: 1000/1000
+[JITTER] Min: 62 us
+[JITTER] Avg: 355.32 us
+[JITTER] Max: 593 us
+[JITTER] P99: 460 us
+[JITTER] Missed deadlines: 0
+
+[JITTER HISTOGRAM]
+0-100 us:       26
+100-500 us:     969
+500-1000 us:    5
+>1000 us:       0
+==========================================
+
+
+========== SCHED_FIFO ==========
+========== SENSOR JITTER REPORT ==========
+[JITTER] Scheduling: SCHED_FIFO
+[JITTER] Samples: 1000/1000
+[JITTER] Min: 10 us
+[JITTER] Avg: 243.51 us
+[JITTER] Max: 326 us
+[JITTER] P99: 312 us
+[JITTER] Missed deadlines: 0
+
+[JITTER HISTOGRAM]
+0-100 us:       37
+100-500 us:     963
+500-1000 us:    0
+>1000 us:       0
+==========================================
+
+
+========== ANALYSIS ==========
+SCHED_OTHER P99: 460 us
+SCHED_FIFO P99: 312 us
+P99 reduction: 32.17%
+Both experiments collected 1000 samples.
+Both experiments reported 0 missed deadlines.
