@@ -1,6 +1,8 @@
 # LOS201 — Embedded Linux Systems
 
-Repository lưu trữ bài thực hành và Assignment môn **Embedded Linux Systems (LOS201)** trên nền tảng **ARMv7-A Cortex-A9**, sử dụng Ubuntu làm host và QEMU `vexpress-a9` làm target.
+This repository contains laboratory exercises and assignments for **Embedded Linux Systems (LOS201)**, focusing on Linux kernel development, device drivers, embedded applications, debugging, performance profiling, and real-time scheduling.
+
+The primary development environment uses **Ubuntu Linux** as the host system and **QEMU ARMv7-A Cortex-A9 (`vexpress-a9`)** as the target platform.
 
 ## Student Information
 
@@ -10,204 +12,428 @@ Repository lưu trữ bài thực hành và Assignment môn **Embedded Linux Sys
 | Student ID | SE205174 |
 | Group | 10 |
 | Course | Embedded Linux Systems (LOS201) |
+| Target Architecture | ARMv7-A Cortex-A9 |
+| Kernel Version | Linux 5.15 |
 
-## Lab & Assignment Overview
+## Repository Overview
 
-| Bài | Chủ đề theo đề bài | Nội dung trọng tâm | Thư mục |
+| Project | Topic | Main Technologies | Directory |
 |---|---|---|---|
-| LAB01 | Cấu hình Kernel & Khởi động Hệ thống Linux Nhúng (ARMv7) | Kernel, U-Boot, BusyBox, initramfs, QEMU | [LAB01](./LAB01/) |
-| LAB02 | Viết Device Driver & Quản lý File System | Character driver, procfs/sysfs, MTD/JFFS2, BusyBox init | [LAB02](./LAB02/) |
-| LAB03 | Debugging Kernel & Phân tích Hiệu năng Ứng dụng Nhúng | GDB remote, Valgrind, strace/perf, cyclictest, PREEMPT_RT | [LAB03](./LAB03/) |
-| Assignment 01 | How to Write a Device Driver | ioctl, miscdevice, driver analysis, theory | [Assignment01](./Assignment01/) |
+| LAB01 | Embedded Linux Boot | Linux Kernel, U-Boot, BusyBox, QEMU | [LAB01](./LAB01/) |
+| LAB02 | Device Drivers & Filesystems | Character Driver, procfs, sysfs, MTD, JFFS2 | [LAB02](./LAB02/) |
+| LAB03 | Debugging & Performance Analysis | GDB, Valgrind, strace, perf, Real-Time Linux | [LAB03](./LAB03/) |
+| Assignment 01 | Linux Device Driver Development | IOCTL, Misc Device, Mutex, Atomic Operations | [Assignment01](./Assignment01/) |
+| Assignment 02 | Sensor Monitoring System | Kernel Module, POSIX Threads, Message Queues, Circular Buffer | [Assignment02](./Assignment02/) |
 
-## LAB01 — Kernel Configuration & Embedded Linux Boot
+---
 
-**Mục tiêu theo đề:** Xây dựng hệ thống Linux nhúng ARMv7 có thể khởi động trên QEMU.
+## LAB01 — Embedded Linux Boot
 
-- Cấu hình và cross-compile Linux kernel cho ARMv7 Cortex-A9.
-- Làm việc với U-Boot và các tham số khởi động (`bootargs`, `bootcmd`).
-- Xây dựng root filesystem tối giản bằng BusyBox, đóng gói `initramfs`.
-- Khởi động kernel và userspace trong QEMU; kiểm tra boot log.
+### Objective
 
-**Công cụ:** Linux kernel 5.15, U-Boot, BusyBox, ARM GNU toolchain, QEMU.
+Build a minimal ARM-based embedded Linux system and successfully boot it using QEMU.
 
-**Bài nộp:** [Mở thư mục LAB01](./LAB01/).
+### Main Features
+
+- Configure and cross-compile the Linux kernel for ARMv7-A.
+- Build and configure U-Boot.
+- Compile BusyBox for an embedded root filesystem.
+- Create an initramfs image.
+- Configure kernel boot parameters.
+- Boot the system using QEMU `vexpress-a9`.
+- Verify kernel initialization and userspace startup.
+
+### Technologies
+
+`Linux 5.15` · `U-Boot` · `BusyBox` · `QEMU` · `ARM Cross-Compiler`
+
+**Project:** [LAB01](./LAB01/)
+
+---
 
 ## LAB02 — Device Drivers & Filesystem Management
 
-**Mục tiêu theo đề:** Phát triển kernel module và nghiên cứu giao diện driver/filesystem.
+### Objective
 
-- Character device driver với `open`, `read`, `write`, `release`.
-- Tương tác giữa user space và kernel space qua `copy_to_user()` và `copy_from_user()`.
-- Cung cấp thông tin driver qua `/proc` và `/sys` (procfs/sysfs).
-- Tìm hiểu MTD, mô phỏng NAND flash và filesystem JFFS2.
-- Tìm hiểu cơ chế khởi động module bằng BusyBox init.
+Develop Linux kernel modules and investigate embedded filesystem management.
 
-**Công cụ:** Linux kernel modules, QEMU, `mtd-utils`, BusyBox.
+### Main Features
 
-**Bài nộp:** [Mở thư mục LAB02](./LAB02/).
+- Implement a character device driver.
+- Support `open()`, `read()`, `write()`, and `release()`.
+- Exchange data between kernel space and userspace.
+- Use `copy_to_user()` and `copy_from_user()`.
+- Expose driver information through `/proc` and `/sys`.
+- Load and unload kernel modules.
+- Investigate MTD devices and NAND flash emulation.
+- Work with JFFS2 and SquashFS images.
+- Explore module initialization with BusyBox.
 
-## LAB03 — Kernel Debugging & Performance Analysis
+### Driver Interfaces
 
-**Mục tiêu theo đề:** Phát hiện lỗi chương trình, phân tích hiệu năng và đánh giá độ trễ.
+```text
+/proc/lab2_info
+/sys/class/lab2_class/lab2/status
+```
 
-- **GDB multiarch + gdbserver:** remote debugging ứng dụng ARM trong QEMU; breakpoint, watchpoint và backtrace.
-- **Valgrind:** kiểm tra memory leak và lỗi truy cập bộ nhớ.
-- **strace / perf:** theo dõi system calls và phân tích CPU hotspots.
-- **cyclictest / PREEMPT_RT:** đo và so sánh scheduling latency giữa các cấu hình kernel.
+### Technologies
 
-**Bài nộp:** [Mở thư mục LAB03](./LAB03/).
+`Linux Kernel Modules` · `Character Devices` · `procfs` · `sysfs` · `MTD` · `JFFS2`
 
-## Assignment 01 — How to Write a Device Driver
+**Project:** [LAB02](./LAB02/)
 
-Assignment mở rộng kiến thức của LAB02, gồm bốn phần theo đề bài:
+---
 
-| Task | Nội dung | Điểm tối đa |
-|---|---|---:|
-| Task 1 | Mở rộng character driver với `ioctl` interface | 40 |
-| Task 2 | Xây dựng misc counter device driver | 30 |
-| Task 3 | Báo cáo phân tích và thiết kế driver | 20 |
-| Task 4 | Trả lời câu hỏi lý thuyết | 10 |
+## LAB03 — Debugging & Performance Analysis
+
+### Objective
+
+Learn to debug embedded applications, detect memory errors, analyze system performance, and evaluate scheduling latency.
+
+### Main Features
+
+- Debug ARM applications using GDB and gdbserver.
+- Identify and fix application defects.
+- Detect memory leaks using Valgrind.
+- Analyze system calls using strace.
+- Profile application performance using perf.
+- Evaluate scheduling latency.
+- Compare standard Linux and real-time scheduling behavior.
+- Generate performance logs and analysis reports.
+
+### Tools
+
+`GDB` · `gdbserver` · `Valgrind` · `strace` · `perf` · `cyclictest`
+
+**Project:** [LAB03](./LAB03/)
+
+---
+
+## Assignment 01 — Linux Device Driver Development
+
+### Objective
+
+Develop and analyze Linux device drivers using IOCTL interfaces and the miscellaneous device framework.
 
 ### Task 1 — IOCTL Character Driver
 
-Driver `asgn1_driver` cung cấp device `/dev/asgn1` và các lệnh điều khiển:
+The `asgn1_driver` module provides a character device:
 
-| IOCTL command | Chức năng |
+```text
+/dev/asgn1
+```
+
+Supported IOCTL commands:
+
+| Command | Description |
 |---|---|
-| `ASGN1_RESET_BUFFER` | Xóa buffer và reset bộ đếm đọc/ghi |
-| `ASGN1_GET_STATS` | Trả về thống kê hoạt động driver |
-| `ASGN1_SET_MODE` | Chọn chế độ `[KERNEL]` prefix hoặc echo |
-| `ASGN1_GET_VERSION` | Trả về chuỗi phiên bản driver |
+| `ASGN1_RESET_BUFFER` | Reset the internal buffer and counters |
+| `ASGN1_GET_STATS` | Retrieve driver statistics |
+| `ASGN1_SET_MODE` | Configure driver operating mode |
+| `ASGN1_GET_VERSION` | Retrieve the driver version |
 
-Driver sử dụng `unlocked_ioctl`, mutex để đồng bộ dữ liệu và kiểm tra lệnh không hợp lệ.
+Additional features include mutex synchronization, input validation, and kernel-to-userspace data transfer.
 
 ### Task 2 — Misc Counter Driver
 
-Driver `counter_driver` sử dụng `misc_register()` và cung cấp:
+The `counter_driver` module provides:
 
-- `/dev/counter`: đọc giá trị counter (tự tăng sau mỗi lần đọc); ghi số nguyên để đặt lại giá trị.
-- `atomic_t`: quản lý bộ đếm an toàn khi truy cập đồng thời.
-- `/proc/counter_info`: hiển thị giá trị counter, số lần đọc và số lần ghi.
-- Kiểm tra input không hợp lệ và xử lý file offset khi đọc.
+```text
+/dev/counter
+/proc/counter_info
+```
 
-### Source Code, Logs & Report
+Features:
 
-- [Task 1 — ioctl driver](./Assignment01/SE205174_NguyenTranNamNguyen_Asgn01/task1_ioctl/)
-- [Task 2 — misc counter driver](./Assignment01/SE205174_NguyenTranNamNguyen_Asgn01/task2_misc/)
-- [Test outputs & kernel logs](./Assignment01/SE205174_NguyenTranNamNguyen_Asgn01/logs/)
-- [Báo cáo PDF](./Assignment01/SE205174_NguyenTranNamNguyen_Asgn01/bao_cao/SE205174_NguyenTranNamNguyen_Asgn01_BaoCao.pdf)
-- [File nén nộp bài (.tar.gz)](./Assignment01/SE205174_NguyenTranNamNguyen_Asgn01.tar.gz)
+- Register a miscellaneous device.
+- Maintain a counter using `atomic_t`.
+- Support counter read and write operations.
+- Track read and write statistics.
+- Validate userspace input.
+
+### Tasks 3–4
+
+- Driver architecture and implementation analysis.
+- Technical documentation and theoretical questions.
+
+### Assignment Files
+
+- [Assignment 01 Directory](./Assignment01/)
+- [IOCTL Driver](./Assignment01/SE205174_NguyenTranNamNguyen_Asgn01/task1_ioctl/)
+- [Misc Counter Driver](./Assignment01/SE205174_NguyenTranNamNguyen_Asgn01/task2_misc/)
+- [Test Logs](./Assignment01/SE205174_NguyenTranNamNguyen_Asgn01/logs/)
+- [PDF Report](./Assignment01/SE205174_NguyenTranNamNguyen_Asgn01/bao_cao/SE205174_NguyenTranNamNguyen_Asgn01_BaoCao.pdf)
+
+---
+
+## Assignment 02 — Sensor Monitoring System
+
+### Objective
+
+Develop a multithreaded sensor monitoring application integrated with a Linux kernel device driver.
+
+The system collects simulated sensor measurements, processes data, detects abnormal conditions, and records monitoring information.
+
+### System Architecture
+
+```text
++----------------------------+
+| Linux Kernel Space         |
+|                            |
+| SMS Sensor Driver          |
+| /dev/sms_sensor            |
+| /proc/sms_stats            |
++-------------+--------------+
+              |
+              v
++----------------------------+
+| User Space Application     |
+|                            |
+| Sensor Thread              |
+|       |                    |
+|       v                    |
+| Circular Buffer            |
+|       |                    |
+|       v                    |
+| Processor Thread           |
+|       |                    |
+|       v                    |
+| POSIX Message Queues       |
+|       |                    |
+|       +----> Alert Thread  |
+|       |                    |
+|       +----> Logger Thread |
++----------------------------+
+```
+
+### Task 1 — Sensor Device Driver
+
+Implement a Linux kernel module providing:
+
+```text
+/dev/sms_sensor
+/proc/sms_stats
+```
+
+Main capabilities:
+
+- Sensor data generation and reading.
+- Character device operations.
+- Configurable sampling interval using IOCTL.
+- Driver statistics through procfs.
+- ARM kernel module compilation.
+
+### Task 2 — Multithreaded Monitoring Application
+
+The application uses four main threads:
+
+| Thread | Responsibility |
+|---|---|
+| Sensor Thread | Read or generate sensor samples |
+| Processor Thread | Calculate averages and process samples |
+| Alert Thread | Detect and display abnormal conditions |
+| Logger Thread | Save sensor data and alerts |
+
+Additional features:
+
+- Circular buffer for sensor measurements.
+- POSIX message queues for inter-thread communication.
+- Temperature and humidity monitoring.
+- Rolling-average calculations.
+- Command-line configuration.
+- Graceful shutdown and resource cleanup.
+
+### Task 3 — Debugging and Performance Analysis
+
+The application was tested using:
+
+- **GDB:** Debugging and breakpoint verification.
+- **Valgrind:** Memory leak and error detection.
+- **strace:** System call tracing.
+- **perf:** CPU performance profiling.
+- **procfs:** Runtime statistics and memory information.
+
+Recorded Valgrind results:
+
+```text
+Total heap usage: 8 allocs, 8 frees
+In use at exit: 0 bytes
+ERROR SUMMARY: 0 errors
+```
+
+### Task 4 — Scheduling and Jitter Analysis
+
+Scheduling behavior was evaluated using:
+
+- `SCHED_OTHER`
+- `SCHED_FIFO`
+
+Recorded measurements:
+
+| Metric | SCHED_OTHER | SCHED_FIFO |
+|---|---:|---:|
+| Average jitter | 355.32 µs | 243.51 µs |
+| P99 jitter | 460 µs | 312 µs |
+
+The measured P99 jitter decreased by approximately **32.17%** in this test.
+
+These values represent the recorded test conditions, not a universal real-time performance guarantee.
+
+### Sensor Monitoring Test
+
+The host application was compiled and executed successfully.
+
+Example command:
+
+```bash
+./app/sms_app_x86 -i 500 -t 40 -h 80 -d 30
+```
+
+Recorded logger output:
+
+```text
+Sample records: 82
+Alert records: 22
+```
+
+Verified alert types:
+
+- `TEMP_HIGH`
+- `HUMID_HIGH`
+- `TEMP_SPIKE`
+
+### Build Instructions
+
+From the Assignment 02 directory:
+
+```bash
+cd Assignment02
+
+make arm
+make host
+```
+
+Generated applications:
+
+```text
+app/sms_app       ARMv7-A executable
+app/sms_app_x86   x86-64 executable
+```
+
+The ARM build requires the appropriate cross-compilation toolchain.
+
+Kernel module compilation additionally requires a configured and prepared Linux kernel build tree matching the target kernel.
+
+### Assignment Files
+
+- [Assignment 02 Directory](./Assignment02/)
+- [Application Source Code](./Assignment02/app/)
+- [Sensor Kernel Driver](./Assignment02/driver/)
+- [Debugging and Performance Logs](./Assignment02/logs/)
+- [Initramfs Output](./Assignment02/output/)
+- [PDF Report](./Assignment02/bao_cao/SE205174_Asgn02_BaoCao.pdf)
+- [Assignment 02 README](./Assignment02/README.md)
+
+---
 
 ## Development Environment
 
-| Component | Environment |
+| Component | Technology |
 |---|---|
-| Host | Ubuntu Linux |
-| Target | ARMv7-A Cortex-A9 |
-| Emulation | QEMU `vexpress-a9` |
-| Kernel | Linux 5.15 |
-| Cross-compiler | `arm-linux-gnueabihf-` |
-| Languages | C, Shell |
+| Host Operating System | Ubuntu Linux |
+| Target Architecture | ARMv7-A Cortex-A9 |
+| Emulator | QEMU `vexpress-a9` |
+| Linux Kernel | 5.15 |
+| ARM Toolchain | `arm-linux-gnueabihf-` |
+| Programming Languages | C, Shell |
+| Build System | GNU Make |
+| Debugging Tools | GDB, Valgrind, strace |
+| Profiling Tools | perf |
+| Concurrency | POSIX Threads, POSIX Message Queues |
+
+---
 
 ## Repository Structure
 
-Cấu trúc dưới đây được tóm tắt từ các thư mục thực tế trong repository (các file ảnh, log và file build phụ được lược bớt để dễ đọc).
-
 ```text
 LOS201/
-├── LAB01/
-│   ├── bao_cao/
-│   │   └── SE205174_Lab01_BaoCao.pdf
-│   ├── configs/
-│   │   ├── busybox.config
-│   │   ├── kernel.config
-│   │   └── uboot.config
-│   ├── output/
-│   │   ├── initramfs.cpio.gz
-│   │   ├── u-boot.bin
-│   │   ├── vexpress-v2p-ca9.dtb
-│   │   └── zImage
-│   ├── rootfs/
-│   │   └── initramfs/                 # Root filesystem, init, bin, dev, etc...
-│   └── SE205174_NguyenTranNamNguyen_Lab01.tar.gz
-│
-├── LAB02/
-│   ├── bao_cao/
-│   │   ├── SE205174_Lab02_BaoCao.pdf
-│   │   └── LAB02_*.png               # Ảnh kiểm thử driver, JFFS2, init...
-│   ├── configs/
-│   ├── driver/
-│   │   ├── lab2_driver.c
-│   │   ├── lab2_driver.ko
-│   │   └── Makefile
-│   ├── mtd/
-│   │   ├── jffs2_data/
-│   │   ├── rootfs.jffs2
-│   │   ├── nand_dump.bin
-│   │   ├── lab2_rootfs.squashfs
-│   │   └── squashfs_root/
-│   ├── output/
-│   │   └── initramfs_lab2.cpio.gz
-│   ├── rootfs/
-│   │   └── initramfs/
-│   └── SE205174_NguyenTranNamNguyen_Lab02.tar.gz
-│
-├── LAB03/
-│   ├── apps/
-│   │   ├── buggy_app.c
-│   │   ├── buggy_app_fixed.c
-│   │   ├── leaky_app.c
-│   │   ├── leaky_app_fixed.c
-│   │   ├── perf_target.c
-│   │   └── perf_test_lab03.txt
-│   ├── bao_cao/
-│   │   ├── SE205174_Lab03_BaoCao.pdf
-│   │   ├── latency_comparison.png
-│   │   ├── latency_histogram.png
-│   │   └── LAB03_*.png               # Ảnh GDB, Valgrind, sửa lỗi...
-│   ├── logs/
-│   │   ├── gdb_session.txt
-│   │   ├── valgrind_report.txt
-│   │   ├── strace_summary.txt
-│   │   ├── perf_report.txt
-│   │   ├── hist_standard.txt
-│   │   └── hist_realtime.txt
-│   └── output/
-│       └── initramfs_lab3.cpio.gz
-│
-├── Assignment01/
-│   ├── SE205174_NguyenTranNamNguyen_Asgn01.tar.gz
-│   └── SE205174_NguyenTranNamNguyen_Asgn01/
-│       ├── bao_cao/
-│       │   └── SE205174_NguyenTranNamNguyen_Asgn01_BaoCao.pdf
-│       ├── logs/
-│       │   ├── dmesg_counter.txt
-│       │   ├── dmesg_full.txt
-│       │   ├── test_asgn1_output.txt
-│       │   └── test_counter_output.txt
-│       ├── task1_ioctl/
-│       │   ├── asgn1_driver.c
-│       │   ├── asgn1_driver.ko
-│       │   ├── asgn1_ioctl.h
-│       │   ├── Makefile
-│       │   ├── test_asgn1.sh
-│       │   └── test_ioctl.c
-│       └── task2_misc/
-│           ├── counter_driver.c
-│           ├── counter_driver.ko
-│           ├── Makefile
-│           └── test_counter.sh
-└── README.md
+|
++-- LAB01/
+|   +-- bao_cao/
+|   +-- configs/
+|   +-- output/
+|   +-- rootfs/
+|
++-- LAB02/
+|   +-- bao_cao/
+|   +-- configs/
+|   +-- driver/
+|   +-- mtd/
+|   +-- output/
+|   +-- rootfs/
+|
++-- LAB03/
+|   +-- apps/
+|   +-- bao_cao/
+|   +-- logs/
+|   +-- output/
+|
++-- Assignment01/
+|   +-- SE205174_NguyenTranNamNguyen_Asgn01/
+|   |   +-- bao_cao/
+|   |   +-- logs/
+|   |   +-- task1_ioctl/
+|   |   +-- task2_misc/
+|   +-- SE205174_NguyenTranNamNguyen_Asgn01.tar.gz
+|
++-- Assignment02/
+|   +-- app/
+|   |   +-- include/
+|   |   +-- *.c
+|   |   +-- Makefile
+|   |   +-- sms_app
+|   |   +-- sms_app_x86
+|   +-- driver/
+|   |   +-- sms_sensor_driver.c
+|   |   +-- sms_sensor.h
+|   |   +-- sms_sensor.ko
+|   |   +-- Makefile
+|   +-- logs/
+|   +-- output/
+|   +-- bao_cao/
+|   +-- Makefile
+|   +-- README.md
+|
++-- README.md
 ```
 
-### Báo cáo PDF của từng bài
+Empty directories are not tracked by Git.
 
-- [LAB01 — Báo cáo PDF](./LAB01/bao_cao/SE205174_Lab01_BaoCao.pdf)
-- [LAB02 — Báo cáo PDF](./LAB02/bao_cao/SE205174_Lab02_BaoCao.pdf)
-- [LAB03 — Báo cáo PDF](./LAB03/bao_cao/SE205174_Lab03_BaoCao.pdf)
-- [Assignment 01 — Báo cáo PDF](./Assignment01/SE205174_NguyenTranNamNguyen_Asgn01/bao_cao/SE205174_NguyenTranNamNguyen_Asgn01_BaoCao.pdf)
+---
 
-> **Ghi chú:** README mô tả phạm vi và yêu cầu kỹ thuật của các bài theo tài liệu môn học. Kết quả thực hiện cụ thể, ảnh chụp, log và báo cáo cần được đối chiếu trong từng thư mục bài nộp.
+## Reports
 
-**Repository:** https://github.com/nnguyen1606-dev/LOS201
+| Project | Report |
+|---|---|
+| LAB01 | Check [LAB01](./LAB01/) for available submission files |
+| LAB02 | [PDF Report](./LAB02/bao_cao/SE205174_Lab02_BaoCao.pdf) |
+| LAB03 | [PDF Report](./LAB03/bao_cao/SE205174_Lab03_BaoCao.pdf) |
+| Assignment 01 | [PDF Report](./Assignment01/SE205174_NguyenTranNamNguyen_Asgn01/bao_cao/SE205174_NguyenTranNamNguyen_Asgn01_BaoCao.pdf) |
+| Assignment 02 | [PDF Report](./Assignment02/bao_cao/SE205174_Asgn02_BaoCao.pdf) |
+
+---
+
+## Notes
+
+- ARM applications and kernel modules are intended for the configured embedded Linux target.
+- Host test builds are provided where applicable.
+- Performance measurements depend on the test environment and workload.
+- Refer to individual project directories for source code, logs, build artifacts, and reports.
+- Assignment 02 video demonstration is not included.
+
+---
+
+**Course:** Embedded Linux Systems (LOS201)  
+**Student:** Nguyen Tran Nam Nguyen  
+**Student ID:** SE205174  
+
